@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Post = sequelize.define("Post", {
+  var Item = sequelize.define("Items", {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,10 +14,10 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Post.associate = function(models) {
+  Item.associate = function(models) {
     // We're saying that a Post should belong to an Author
     // A Post can't be created without an Author due to the foreign key constraint
-    Post.belongsTo(models.Author, {
+    Item.belongsTo(models.Seller, {
       foreignKey: {
         allowNull: false
       }
