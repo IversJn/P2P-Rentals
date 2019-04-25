@@ -5,21 +5,21 @@ $(document).ready(function() {
   var sellerContainer = $(".seller-container");
   // Adding event listeners to the form to create a new object, and the button to delete
   // an seller
-  $(document).on("submit", "#seller-form", handlesellerFormSubmit);
+  $(document).on("submit", "#seller-form", handleSellerFormSubmit);
   $(document).on("click", ".delete-seller", handleDeleteButtonPress);
 
   // Getting the initial list of sellers
   getsellers();
 
   // A function to handle what happens when the form is submitted to create a new seller
-  function handlesellerFormSubmit(event) {
+  function handleSellerFormSubmit(event) {
     event.preventDefault();
     // Don't do anything if the name fields hasn't been filled out
     if (!nameInput.val().trim().trim()) {
       return;
     }
     // Calling the upsertseller function and passing in the value of the name input
-    upsertseller({
+    upsertSeller({
       name: nameInput
         .val()
         .trim()
@@ -27,13 +27,13 @@ $(document).ready(function() {
   }
 
   // A function for creating an seller. Calls getsellers upon completion
-  function upsertseller(sellerData) {
+  function upsertSeller(sellerData) {
     $.post("/api/sellers", sellerData)
-      .then(getsellers);
+      .then(getSellers);
   }
 
   // Function for creating a new list row for sellers
-  function createsellerRow(sellerData) {
+  function createSellerRow(sellerData) {
     var newTr = $("<tr>");
     newTr.data("seller", sellerData);
     newTr.append("<td>" + sellerData.name + "</td>");
@@ -44,24 +44,24 @@ $(document).ready(function() {
     }
     newTr.append("<td><a href='/blog?seller_id=" + sellerData.id + "'>Go to Posts</a></td>");
     newTr.append("<td><a href='/cms?seller_id=" + sellerData.id + "'>Create a Post</a></td>");
-    newTr.append("<td><a style='cursor:pointer;color:red' class='delete-seller'>Delete seller</a></td>");
+    newTr.append("<td><a style='cursor:pointer;color:red' class='delete-seller'>Delete Seller</a></td>");
     return newTr;
   }
 
   // Function for retrieving sellers and getting them ready to be rendered to the page
-  function getsellers() {
+  function getSellers() {
     $.get("/api/sellers", function(data) {
       var rowsToAdd = [];
       for (var i = 0; i < data.length; i++) {
-        rowsToAdd.push(createsellerRow(data[i]));
+        rowsToAdd.push(createSellerRow(data[i]));
       }
-      rendersellerList(rowsToAdd);
+      renderSellerList(rowsToAdd);
       nameInput.val("");
     });
   }
 
   // A function for rendering the list of sellers to the page
-  function rendersellerList(rows) {
+  function renderSellerList(rows) {
     sellerList.children().not(":last").remove();
     sellerContainer.children(".alert").remove();
     if (rows.length) {
@@ -89,6 +89,6 @@ $(document).ready(function() {
       method: "DELETE",
       url: "/api/sellers/" + id
     })
-      .then(getsellers);
+      .then(getSellers);
   }
 });
