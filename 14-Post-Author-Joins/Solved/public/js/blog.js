@@ -1,8 +1,8 @@
 $(document).ready(function() {
   /* global moment */
 
-  // equipContainer holds all of our posts
-  var equipContainer = $(".equip-container");
+  // sellerContainer holds all of our posts
+  var itemContainer = $(".item-container");
   var postCategorySelect = $("#category");
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handlePostDelete);
@@ -10,7 +10,7 @@ $(document).ready(function() {
   // Variable to hold our posts
   var posts;
 
-  // The code below handles the case where we want to get equip posts for a specific seller
+  // The code below handles the case where we want to get item posts for a specific seller
   // Looks for a query param in the url for seller_id
   var url = window.location.search;
   var sellerId;
@@ -55,12 +55,12 @@ $(document).ready(function() {
 
   // InitializeRows handles appending all of our constructed post HTML inside equipContainer
   function initializeRows() {
-    equipContainer.empty();
+    itemContainer.empty();
     var postsToAdd = [];
     for (var i = 0; i < posts.length; i++) {
       postsToAdd.push(createNewRow(posts[i]));
     }
-    equipContainer.append(postsToAdd);
+    itemContainer.append(postsToAdd);
   }
 
   // This function constructs a post's HTML
@@ -79,9 +79,9 @@ $(document).ready(function() {
     editBtn.addClass("edit btn btn-info");
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
-    var newPostseller = $("<h5>");
-    newPostseller.text("Written by: " + post.seller.name);
-    newPostseller.css({
+    var newPostSeller = $("<h5>");
+    newPostSeller.text("Written by: " + post.seller.name);
+    newPostSeller.css({
       float: "right",
       color: "blue",
       "margin-top":
@@ -97,7 +97,7 @@ $(document).ready(function() {
     newPostCardHeading.append(deleteBtn);
     newPostCardHeading.append(editBtn);
     newPostCardHeading.append(newPostTitle);
-    newPostCardHeading.append(newPostseller);
+    newPostCardHeading.append(newPostSeller);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
@@ -128,14 +128,14 @@ $(document).ready(function() {
     var query = window.location.search;
     var partial = "";
     if (id) {
-      partial = " for seller #" + id;
+      partial = " for Seller #" + id;
     }
-    equipContainer.empty();
+    itemContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
     messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
     "'>here</a> in order to get started.");
-    equipContainer.append(messageH2);
+    itemContainer.append(messageH2);
   }
 
 });
