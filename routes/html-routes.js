@@ -4,8 +4,8 @@
 
 // Dependencies
 // =============================================================
-var path = require("path");
-
+//var path = require("path");
+var controllers = require("../controllers/itemsController");
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -14,22 +14,26 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/blog.html"));
+    res.render("index");
+    //res.sendFile(path.join(__dirname, "../public/blog.html"));
   });
 
   // cms route loads cms.html
-  app.get("/cms", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/cms.html"));
+  app.get("/item/:id", function(req, res) {
+    res.render("item");
+    //res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
   // blog route loads blog.html
-  app.get("/blog", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/blog.html"));
+  app.get("/createItem", function(req, res) {
+    res.render("createItem");
+    //res.sendFile(path.join(__dirname, "../public/blog.html"));
   });
 
   // authors route loads author-manager.html
-  app.get("/authors", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/author-manager.html"));
-  });
+  // app.get("/sellers", function(req, res) {
+
+  //   res.sendFile(path.join(__dirname, "../public/author-manager.html"));
+  // });
 
 };
