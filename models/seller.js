@@ -1,7 +1,23 @@
 module.exports = function(sequelize, DataTypes) {
   var Seller = sequelize.define("Seller", {
     // Giving the Author model a name of type STRING
-    name: DataTypes.STRING
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    }
   });
 
   Seller.associate = function(models) {
@@ -12,5 +28,5 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
-  return Author;
+  return Seller;
 };
