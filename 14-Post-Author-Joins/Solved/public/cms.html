@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>CMS - Express</title>
+	<title>Create an Item</title>
 	<!-- Latest compiled and minified CSS & JS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
@@ -15,23 +15,37 @@
 	<div class="container hidden">
 		<div class="row top-30">
       <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/blog">Go to Blog</a>
+        <a class="btn btn-light" href="/blog">View Items</a>
       </div>
       <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/authors">Manage Authors</a>
+        <a class="btn btn-light" href="/authors">Manage Sellers</a>
       </div>
     </div>
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 				<form id="cms">
 					<div class="form-group">
-						<label for="title">Title:</label>
-						<input placeholder="Post Title" type="text" class="form-control" id="title">
+						<label for="name">Name:</label>
+						<input placeholder="Post Title" type="text" class="form-control" id="name">
 						<br />
-						<label for="body">Body:</label>
+						<div class="form-group">
+							<label for="quality">Example select</label>
+							<select class="form-control" id="quality">
+								<option>New</option>
+								<option>Great</option>
+								<option>Good</option>
+								<option>Minor Issues</option>
+								<option>Poor</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="imageInput">Input Photo</label>
+							<input type="file" class="form-control-file" id="imageInput">
+						</div>
+						<label for="body">Description:</label>
 						<textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
 						<div class="form-group">
-							<label for="category">Select Author:</label>
+							<label for="category">Select Seller:</label>
 							<select class="custom-select" id="author">
   						</select>
 						</div>
