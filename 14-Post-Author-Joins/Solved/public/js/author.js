@@ -37,13 +37,13 @@ $(document).ready(function() {
     var newTr = $("<tr>");
     newTr.data("seller", sellerData);
     newTr.append("<td>" + sellerData.name + "</td>");
-    if (sellerData.Posts) {
-      newTr.append("<td> " + sellerData.Posts.length + "</td>");
+    if (sellerData.Items) {
+      newTr.append("<td> " + sellerData.Itemss.length + "</td>");
     } else {
       newTr.append("<td>0</td>");
     }
-    newTr.append("<td><a href='/blog?seller_id=" + sellerData.id + "'>Go to Posts</a></td>");
-    newTr.append("<td><a href='/cms?seller_id=" + sellerData.id + "'>Create a Post</a></td>");
+    newTr.append("<td><a href='/blog?seller_id=" + sellerData.id + "'>Go to Itemss</a></td>");
+    newTr.append("<td><a href='/cms?seller_id=" + sellerData.id + "'>Create a Item</a></td>");
     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-seller'>Delete Seller</a></td>");
     return newTr;
   }
@@ -77,7 +77,7 @@ $(document).ready(function() {
   function renderEmpty() {
     var alertDiv = $("<div>");
     alertDiv.addClass("alert alert-danger");
-    alertDiv.text("You must create an seller before you can create a Post.");
+    alertDiv.text("You must create an seller before you can create a Item.");
     sellerContainer.append(alertDiv);
   }
 

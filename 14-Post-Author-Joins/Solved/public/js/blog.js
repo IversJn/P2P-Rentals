@@ -1,14 +1,14 @@
 $(document).ready(function() {
   /* global moment */
 
-  // sellerContainer holds all of our posts
+  // sellerContainer holds all of our items
   var itemContainer = $(".item-container");
-  var postCategorySelect = $("#category");
+  var itemCategorySelect = $("#category");
   // Click events for the edit and delete buttons
-  $(document).on("click", "button.delete", handlePostDelete);
-  $(document).on("click", "button.edit", handlePostEdit);
-  // Variable to hold our posts
-  var posts;
+  $(document).on("click", "button.delete", handleItemDelete);
+  $(document).on("click", "button.edit", handleItemEdit);
+  // Variable to hold our items
+  var items;
 
   // The code below handles the case where we want to get item posts for a specific seller
   // Looks for a query param in the url for seller_id
@@ -16,24 +16,24 @@ $(document).ready(function() {
   var sellerId;
   if (url.indexOf("?seller_id=") !== -1) {
     sellerId = url.split("=")[1];
-    getPosts(sellerId);
+    getItems(sellerId);
   }
   // If there's no sellerId we just get all posts as usual
   else {
-    getPosts();
+    getItems();
   }
 
 
   // This function grabs posts from the database and updates the view
-  function getPosts(seller) {
+  function getItems(seller) {
     sellerId = seller || "";
     if (sellerId) {
       sellerId = "/?seller_id=" + sellerId;
     }
-    $.get("/api/posts" + sellerId, function(data) {
-      console.log("Posts", data);
-      posts = data;
-      if (!posts || !posts.length) {
+    $.get("/api/items" + sellerId, function(data) {
+      console.log("Items", data);
+      items = data;
+      if (!items || !items.length) {
         displayEmpty(seller);
       }
       else {
@@ -43,84 +43,84 @@ $(document).ready(function() {
   }
 
   // This function does an API call to delete posts
-  function deletePost(id) {
+  function deleteItem(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/posts/" + id
+      url: "/api/items/" + id
     })
       .then(function() {
-        getPosts(postCategorySelect.val());
+        getItems(itemCategorySelect.val());
       });
   }
 
   // InitializeRows handles appending all of our constructed post HTML inside equipContainer
   function initializeRows() {
     itemContainer.empty();
-    var postsToAdd = [];
-    for (var i = 0; i < posts.length; i++) {
-      postsToAdd.push(createNewRow(posts[i]));
+    var itemsToAdd = [];
+    for (var i = 0; i < items.length; i++) {
+      itemsToAdd.push(createNewRow(items[i]));
     }
-    itemContainer.append(postsToAdd);
+    itemContainer.append(itemsToAdd);
   }
 
   // This function constructs a post's HTML
-  function createNewRow(post) {
-    var formattedDate = new Date(post.createdAt);
+  function createNewRow(item) {
+    var formattedDate = new Date(item.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    var newPostCard = $("<div>");
-    newPostCard.addClass("card");
-    var newPostCardHeading = $("<div>");
-    newPostCardHeading.addClass("card-header");
+    var newItemCard = $("<div>");
+    newItemCard.addClass("card");
+    var newItemCardHeading = $("<div>");
+    newItemCardHeading.addClass("card-header");
     var deleteBtn = $("<button>");
     deleteBtn.text("x");
     deleteBtn.addClass("delete btn btn-danger");
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-info");
-    var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
-    var newPostSeller = $("<h5>");
-    newPostSeller.text("Written by: " + post.seller.name);
-    newPostSeller.css({
+    var newItemTitle = $("<h2>");
+    var newItemDate = $("<small>");
+    var newItemSeller = $("<h5>");
+    newItemSeller.text("Written by: " + item.seller.name);
+    newItemSeller.css({
       float: "right",
       color: "blue",
       "margin-top":
       "-10px"
     });
-    var newPostCardBody = $("<div>");
-    newPostCardBody.addClass("card-body");
-    var newPostBody = $("<p>");
-    newPostTitle.text(post.title + " ");
-    newPostBody.text(post.body);
-    newPostDate.text(formattedDate);
-    newPostTitle.append(newPostDate);
-    newPostCardHeading.append(deleteBtn);
-    newPostCardHeading.append(editBtn);
-    newPostCardHeading.append(newPostTitle);
-    newPostCardHeading.append(newPostSeller);
-    newPostCardBody.append(newPostBody);
-    newPostCard.append(newPostCardHeading);
-    newPostCard.append(newPostCardBody);
-    newPostCard.data("post", post);
-    return newPostCard;
+    var newItemCardBody = $("<div>");
+    newItemCardBody.addClass("card-body");
+    var newItemBody = $("<p>");
+    newItemTitle.text(item.title + " ");
+    newItemBody.text(item.body);
+    newItemDate.text(formattedDate);
+    newItemTitle.append(newitemDate);
+    newItemCardHeading.append(deleteBtn);
+    newItemCardHeading.append(editBtn);
+    newItemCardHeading.append(newItemTitle);
+    newItemCardHeading.append(newItemSeller);
+    newItemCardBody.append(newItemBody);
+    newItemCard.append(newItemCardHeading);
+    newItemCard.append(newItemCardBody);
+    newItemCard.data("item", item);
+    return newItemCard;
   }
 
-  // This function figures out which post we want to delete and then calls deletePost
-  function handlePostDelete() {
-    var currentPost = $(this)
+  // This function figures out which post we want to delete and then calls deleteItem
+  function handleItemDelete() {
+    var currentItem = $(this)
       .parent()
       .parent()
-      .data("post");
-    deletePost(currentPost.id);
+      .data("item");
+    deleteItem(currentItem.id);
   }
 
   // This function figures out which post we want to edit and takes it to the appropriate url
-  function handlePostEdit() {
-    var currentPost = $(this)
+  function handleItemEdit() {
+    var currentItem = $(this)
       .parent()
       .parent()
-      .data("post");
-    window.location.href = "/cms?post_id=" + currentPost.id;
+      .data("item");
+    window.location.href = "/cms?item_id=" + currentItem.id;
   }
 
   // This function displays a message when there are no posts
@@ -133,7 +133,7 @@ $(document).ready(function() {
     itemContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
+    messageH2.html("No items yet" + partial + ", navigate <a href='/cms" + query +
     "'>here</a> in order to get started.");
     itemContainer.append(messageH2);
   }
