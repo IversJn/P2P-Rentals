@@ -13,7 +13,7 @@ var db = require("../models");
 module.exports = function(app) {
 
   // GET route for getting all of the items
-  app.get("/api/items", function(req, res) {
+  app.get("/api/recipes", function(req, res) {
     var query = {};
     if (req.query.seller_id) {
       query.SellerId = req.query.seller_id;
@@ -30,7 +30,7 @@ module.exports = function(app) {
   });
 
   // Get route for retrieving a single Item
-  app.get("/api/items/:id", function(req, res) {
+  app.get("/api/recipes/:id", function(req, res) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
@@ -45,14 +45,14 @@ module.exports = function(app) {
   });
 
   // Item route for saving a new Item
-  app.post("/api/items", function(req, res) {
+  app.post("/api/recipes", function(req, res) {
     db.Item.create(req.body).then(function(dbItem) {
       res.json(dbItem);
     });
   });
 
   // DELETE route for deleting items
-  app.delete("/api/items/:id", function(req, res) {
+  app.delete("/api/recipes/:id", function(req, res) {
     db.Item.destroy({
       where: {
         id: req.params.id
@@ -63,7 +63,7 @@ module.exports = function(app) {
   });
 
   // PUT route for updating items
-  app.put("/api/items", function(req, res) {
+  app.put("/api/recipes", function(req, res) {
     db.Item.update(
       req.body,
       {
