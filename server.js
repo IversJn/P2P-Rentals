@@ -4,6 +4,7 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
+var path = require("path");
 var express = require("express");
 
 // Sets up the Express App
@@ -26,6 +27,7 @@ app.set("view engine", "handlebars");
 
 // Static directory
 app.use(express.static("public"));
+// app.use(express.static(__dirname + '/public'));
 
 // Routes
 // =============================================================
