@@ -12,25 +12,25 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
 
-  // GET route for getting all of the items
-  app.get("/api/recipes", function(req, res) {
+  // GET route for getting all of the posts
+  app.get("/api/posts", function(req, res) {
     var query = {};
     if (req.query.user_id) {
-      query.SellerId = req.query.user_id;
+      query.UserId = req.query.user_id;
     }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
     db.Recipe.findAll({
       where: query,
-      include: [db.Recipe]
-    }).then(function(dbRecipe) {
-      res.json(dbRecipe);
+      include: [db.User]
+    }).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 
-  // Get route for retrieving a single Item
-  app.get("/api/recipes/:id", function(req, res) {
+  // Get route for retrieving a single post
+  app.get("/api/posts/:id", function(req, res) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
@@ -39,39 +39,39 @@ module.exports = function(app) {
         id: req.params.id
       },
       include: [db.User]
-    }).then(function(dbRecipe) {
-      res.json(dbRecipe);
+    }).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 
-  // Item route for saving a new Item
-  app.post("/api/recipes", function(req, res) {
-    db.Recipe.create(req.body).then(function(dbRecipe) {
-      res.json(dbRecipe);
+  // POST route for saving a new post
+  app.post("/api/posts", function(req, res) {
+    db.Recipe.create(req.body).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 
-  // DELETE route for deleting items
-  app.delete("/api/recipes/:id", function(req, res) {
+  // DELETE route for deleting posts
+  app.delete("/api/posts/:id", function(req, res) {
     db.Recipe.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function(dbRecipe) {
-      res.json(dbRecipe);
+    }).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 
-  // PUT route for updating items
-  app.put("/api/recipes", function(req, res) {
+  // PUT route for updating posts
+  app.put("/api/posts", function(req, res) {
     db.Recipe.update(
       req.body,
       {
         where: {
           id: req.body.id
         }
-      }).then(function(dbRecipe) {
-      res.json(dbRecipe);
+      }).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 };

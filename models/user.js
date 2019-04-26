@@ -17,18 +17,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1]
-    }
-    ,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1]
-    },
-    numOfPosts: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      len: [1]
     }
+    // numOfPosts: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   len: [1]
+    // }
   });
 
   User.associate = function(models) {

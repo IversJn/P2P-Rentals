@@ -1,6 +1,10 @@
 $(document).ready(function() {
   // Getting references to the name input and author container, as well as the table body
-  var nameInput = $("#user-name");
+  var firstNameInput = $("#user-first-name");
+  var lastNameInput = $("#user-last-name");
+  var emailInput = $("#user-email");
+  var passwordInput = $("#user-password");
+
   var userList = $("tbody");
   var userContainer = $(".user-container");
   // Adding event listeners to the form to create a new object, and the button to delete
@@ -15,12 +19,21 @@ $(document).ready(function() {
   function handleUserFormSubmit(event) {
     event.preventDefault();
     // Don't do anything if the name fields hasn't been filled out
-    if (!nameInput.val().trim().trim()) {
+    if (!firstNameInput.val().trim().trim() || !lastNameInput.val().trim().trim() || !emailInput.val().trim().trim() || !passwordInput.val().trim().trim()) {
       return;
     }
     // Calling the upsertAuthor function and passing in the value of the name input
     upsertUser({
-      name: nameInput
+      first_name: firstNameInput
+        .val()
+        .trim(),
+      last_name: lastNameInput
+        .val()
+        .trim(),
+      email: emailInput
+        .val()
+        .trim(),
+      password: passwordInput
         .val()
         .trim()
     });
@@ -36,14 +49,14 @@ $(document).ready(function() {
   function createUserRow(userData) {
     var newTr = $("<tr>");
     newTr.data("user", userData);
-    newTr.append("<td>" + userData.name + "</td>");
+    newTr.append("<td>" + userData.first_name + " " + userData.last_name + "</td>");
     if (userData.Recipes) {
       newTr.append("<td> " + userData.Recipes.length + "</td>");
     } else {
       newTr.append("<td>0</td>");
     }
     newTr.append("<td><a href='/recipe?user_id=" + userData.id + "'>Go to Recipes</a></td>");
-    newTr.append("<td><a href='/cms?user_id=" + userData.id + "'>Create a Recipe</a></td>");
+    newTr.append("<td><a href='/create?user_id=" + userData.id + "'>Create a Recipe</a></td>");
     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-user'>Delete User</a></td>");
     return newTr;
   }
@@ -56,7 +69,10 @@ $(document).ready(function() {
         rowsToAdd.push(createUserRow(data[i]));
       }
       renderUserList(rowsToAdd);
-      nameInput.val("");
+      firstNameInput.val("");
+      lastNameInput.val("");
+      emailInput.val("");
+      passwordInput.val("");
     });
   }
 

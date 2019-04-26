@@ -24,7 +24,7 @@ module.exports = function(app) {
   });
 
   // blog route loads blog.html
-  app.get("/createRecipe", function(req, res) {
+  app.get("/create", function(req, res) {
     res.render("createRecipe");
     //res.sendFile(path.join(__dirname, "../public/blog.html"));
   });

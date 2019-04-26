@@ -35,6 +35,7 @@ $(document).ready(function() {
       posts = data;
       if (!posts || !posts.length) {
         displayEmpty(user);
+        //window.location.href = "/create";
       }
       else {
         initializeRows();
@@ -120,11 +121,12 @@ $(document).ready(function() {
       .parent()
       .parent()
       .data("post");
-    window.location.href = "/cms?post_id=" + currentPost.id;
+    window.location.href = "/create?post_id=" + currentPost.id;
   }
 
-  // This function displays a message when there are no posts
-  function displayEmpty(id) {
+  //This function displays a message when there are no posts
+  function displayEmpty() {
+    //window.location.href = "/create";
     var query = window.location.search;
     var partial = "";
     if (id) {
@@ -133,8 +135,7 @@ $(document).ready(function() {
     recipeContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No posts yet" + partial + ", navigate <a href='/cms" + query +
-    "'>here</a> in order to get started.");
+    messageH2.html("No posts yet" + partial + ", navigate <a href='/create'" + query + ">here</a> in order to get started.");
     recipeContainer.append(messageH2);
   }
 

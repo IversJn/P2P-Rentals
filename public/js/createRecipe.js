@@ -1,11 +1,15 @@
 $(document).ready(function() {
   // Getting jQuery references to the post body, title, form, and author select
-  var bodyInput = $("#body");
-  var titleInput = $("#title");
-  var cmsForm = $("#cms");
-  var userSelect = $("#user");
+  var createRecipeForm = $("#create-recipe");
+  var recipeNameInput = $("#recipe-name-input");
+  var urlInput = $("#url-input");
+  var ingredientsInput = $("#ingredients-input");
+  var instructionsInput = $("#instructions-input");
+
+
+  //var userSelect = $("#user");
   // Adding an event listener for when the form is submitted
-  $(cmsForm).on("submit", handleFormSubmit);
+  $(createRecipeForm).on("submit", handleFormSubmit);
   // Gets the part of the url that comes after the "?" (which we have if we're updating a post)
   var url = window.location.search;
   var postId;
@@ -21,7 +25,7 @@ $(document).ready(function() {
   }
   // Otherwise if we have an author_id in our url, preset the author select box to be our Author
   else if (url.indexOf("?user_id=") !== -1) {
-    authorId = url.split("=")[1];
+    userId = url.split("=")[1];
   }
 
   // Getting the authors, and their posts
@@ -31,18 +35,24 @@ $(document).ready(function() {
   function handleFormSubmit(event) {
     event.preventDefault();
     // Wont submit the post if we are missing a body, title, or author
-    if (!titleInput.val().trim() || !bodyInput.val().trim() || !userSelect.val()) {
+    if (!recipeNameInput.val().trim() || !urlInput.val().trim() || !ingredientsInput.val().trim() || !instructionsInput.val().trim()) {
       return;
     }
     // Constructing a newPost object to hand to the database
     var newPost = {
-      title: titleInput
+      recipe_name: recipeNameInput
         .val()
         .trim(),
-      body: bodyInput
+      image: urlInput
         .val()
         .trim(),
-      userId: userSelect.val()
+      ingredients: ingredientsInput
+        .val()
+        .trim(),
+      instructions: instructionsInput
+        .val()
+        .trim()
+      //userId: userSelect.val()
     };
 
     // If we're updating a post run updatePost to update a post
@@ -59,39 +69,39 @@ $(document).ready(function() {
   // Submits a new post and brings user to blog page upon completion
   function submitPost(post) {
     $.post("/api/posts", post, function() {
-      window.location.href = "/recipe";
+      window.location.href = "/";
     });
   }
 
   // Gets post data for the current post if we're editing, or if we're adding to an author's existing posts
-  function getPostData(id, type) {
-    var queryUrl;
-    switch (type) {
-    case "post":
-      queryUrl = "/api/posts/" + id;
-      break;
-    case "author":
-      queryUrl = "/api/users/" + id;
-      break;
-    default:
-      return;
-    }
-    $.get(queryUrl, function(data) {
-      if (data) {
-        console.log(data.UserId || data.id);
-        // If this post exists, prefill our cms forms with its data
-        titleInput.val(data.title);
-        bodyInput.val(data.body);
-        userId = data.UserId || data.id;
-        // If we have a post with this id, set a flag for us to know to update the post
-        // when we hit submit
-        updating = true;
-      }
-    });
-  }
+  // function getPostData(id, type) {
+  //   var queryUrl;
+  //   switch (type) {
+  //   case "post":
+  //     queryUrl = "/api/posts/" + id;
+  //     break;
+  //   case "user":
+  //     queryUrl = "/api/users/" + id;
+  //     break;
+  //   default:
+  //     return;
+  //   }
+  //   $.get(queryUrl, function(data) {
+  //     if (data) {
+  //       console.log(data.UserId || data.id);
+  //       // If this post exists, prefill our cms forms with its data
+  //       titleInput.val(data.title);
+  //       bodyInput.val(data.body);
+  //       userId = data.UserId || data.id;
+  //       // If we have a post with this id, set a flag for us to know to update the post
+  //       // when we hit submit
+  //       updating = true;
+  //     }
+  //   });
+  // }
 
   // A function to get Authors and then render our list of Authors
-  function getAuthors() {
+  function getUsers() {
     $.get("/api/users", renderUserList);
   }
   // Function to either render a list of authors, or if there are none, direct the user to the page
@@ -129,7 +139,7 @@ $(document).ready(function() {
       data: post
     })
       .then(function() {
-        window.location.href = "/recipe";
+        window.location.href = "/recipe/" + postId;
       });
   }
 });
