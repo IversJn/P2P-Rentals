@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Recipe = sequelize.define("Recipe", {
-    name: {
+    recipe_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       len: [1]
     },
     instructions: {
@@ -26,15 +26,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Recipe.associate = function(models) {
-  //   // We're saying that a Post should belong to an Author
-  //   // A Post can't be created without an Author due to the foreign key constraint
-  //   Recipe.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  Recipe.associate = function(models) {
+    // We're saying that a Post should belong to an Author
+    // A Post can't be created without an Author due to the foreign key constraint
+    Recipe.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
 
   return Recipe;
 };
