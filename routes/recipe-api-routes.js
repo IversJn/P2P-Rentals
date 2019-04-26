@@ -15,17 +15,17 @@ module.exports = function(app) {
   // GET route for getting all of the items
   app.get("/api/recipes", function(req, res) {
     var query = {};
-    if (req.query.seller_id) {
-      query.SellerId = req.query.seller_id;
+    if (req.query.user_id) {
+      query.SellerId = req.query.user_id;
     }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
-    db.Item.findAll({
+    db.Recipe.findAll({
       where: query,
-      include: [db.Seller]
-    }).then(function(dbItem) {
-      res.json(dbItem);
+      include: [db.Recipe]
+    }).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 
@@ -34,44 +34,44 @@ module.exports = function(app) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Author
-    db.Item.findOne({
+    db.Recipe.findOne({
       where: {
         id: req.params.id
       },
-      include: [db.Seller]
-    }).then(function(dbItem) {
-      res.json(dbItem);
+      include: [db.User]
+    }).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 
   // Item route for saving a new Item
   app.post("/api/recipes", function(req, res) {
-    db.Item.create(req.body).then(function(dbItem) {
-      res.json(dbItem);
+    db.Recipe.create(req.body).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 
   // DELETE route for deleting items
   app.delete("/api/recipes/:id", function(req, res) {
-    db.Item.destroy({
+    db.Recipe.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function(dbItem) {
-      res.json(dbItem);
+    }).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 
   // PUT route for updating items
   app.put("/api/recipes", function(req, res) {
-    db.Item.update(
+    db.Recipe.update(
       req.body,
       {
         where: {
           id: req.body.id
         }
-      }).then(function(dbItem) {
-      res.json(dbItem);
+      }).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 };
