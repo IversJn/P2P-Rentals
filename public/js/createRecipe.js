@@ -13,7 +13,10 @@ $(document).ready(function() {
   // Gets the part of the url that comes after the "?" (which we have if we're updating a post)
   var url = window.location.search;
   var postId;
+
+  // Daniel I'ms comment - commented out var userId to test recipe creating -
   var userId;
+
   // Sets a flag for whether or not we're updating a post to be false initially
   var updating = false;
 
@@ -35,7 +38,7 @@ $(document).ready(function() {
   function handleFormSubmit(event) {
     event.preventDefault();
     // Wont submit the post if we are missing a body, title, or author
-    if (!recipeNameInput.val().trim() || !urlInput.val().trim() || !ingredientsInput.val().trim() || !instructionsInput.val().trim()) {
+    if (!recipeNameInput.val().trim() || !ingredientsInput.val().trim() || !instructionsInput.val().trim()) {
       return;
     }
     // Constructing a newPost object to hand to the database
@@ -43,16 +46,17 @@ $(document).ready(function() {
       recipe_name: recipeNameInput
         .val()
         .trim(),
-      image: urlInput
-        .val()
-        .trim(),
+      // Daniel im's comment - took out image for testing - 
+      // image: urlInput
+      //   .val()
+      //   .trim(),
       ingredients: ingredientsInput
         .val()
         .trim(),
       instructions: instructionsInput
         .val()
-        .trim()
-      //userId: userSelect.val()
+        .trim(),
+      userId: userSelect.val()
     };
 
     // If we're updating a post run updatePost to update a post

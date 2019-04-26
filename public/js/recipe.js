@@ -125,7 +125,7 @@ $(document).ready(function() {
   }
 
   //This function displays a message when there are no posts
-  function displayEmpty() {
+  function displayEmpty(id) {
     //window.location.href = "/create";
     var query = window.location.search;
     var partial = "";

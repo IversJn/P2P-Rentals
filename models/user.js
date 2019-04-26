@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     //   len: [1]
     // }
   });
-
+//Daniel Im's comment - took out this association to test recipe creation
   User.associate = function(models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
