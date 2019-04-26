@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Seller = sequelize.define("Seller", {
+  var Buyer = sequelize.define("Buyer", {
     // Giving the Author model a name of type STRING
     first_name: {
       type: DataTypes.STRING,
@@ -18,15 +18,26 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       len: [1]
     }
+    ,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    },
+    numOfPosts: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len: [1]
+    }
   });
 
-  Seller.associate = function(models) {
+  Buyer.associate = function(models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
-    Seller.hasMany(models.Item, {
+    Buyer.hasMany(models.Item, {
       onDelete: "cascade"
     });
   };
 
-  return Seller;
+  return Buyer;
 };
