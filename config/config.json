@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "arthurdoelp",
-    "database": "blogger",
+    "password": "Danielim!@#1994",
+    "database": "RecipeList",
     "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"

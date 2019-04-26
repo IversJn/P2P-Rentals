@@ -1,11 +1,14 @@
 $(document).ready(function() {
   // Getting jQuery references to the post body, title, form, and author select
-  var bodyInput = $("#body");
-  var titleInput = $("#title");
   var cmsForm = $("#cms");
-  var userSelect = $("#user");
+  // var userSelect = $("#user");
+console.log(`${bodyInput}
+${nameInput}`)
   // Adding an event listener for when the form is submitted
   $(cmsForm).on("submit", handleFormSubmit);
+  var bodyInput = $("#body");
+  var nameInput = $("#name");
+  var ingredientInput = $("#ingredient");
   // Gets the part of the url that comes after the "?" (which we have if we're updating a post)
   var url = window.location.search;
   var postId;
@@ -19,30 +22,25 @@ $(document).ready(function() {
     postId = url.split("=")[1];
     getPostData(postId, "post");
   }
-  // Otherwise if we have an author_id in our url, preset the author select box to be our Author
-  else if (url.indexOf("?user_id=") !== -1) {
-    authorId = url.split("=")[1];
-  }
-
-  // Getting the authors, and their posts
-  getUsers();
 
   // A function for handling what happens when the form to create a new post is submitted
   function handleFormSubmit(event) {
     event.preventDefault();
-    // Wont submit the post if we are missing a body, title, or author
-    if (!titleInput.val().trim() || !bodyInput.val().trim() || !userSelect.val()) {
+    // Wont submit the post if we are missing a body, title
+    if (!nameInput.val().trim() || !bodyInput.val().trim()) {
       return;
     }
     // Constructing a newPost object to hand to the database
     var newPost = {
-      title: titleInput
+      name: nameInput
         .val()
         .trim(),
-      body: bodyInput
+      instructions: bodyInput
         .val()
         .trim(),
-      userId: userSelect.val()
+      ingredients: ingredientInput
+      .val()
+      .trim()
     };
 
     // If we're updating a post run updatePost to update a post
@@ -58,7 +56,7 @@ $(document).ready(function() {
 
   // Submits a new post and brings user to blog page upon completion
   function submitPost(post) {
-    $.post("/api/posts", post, function() {
+    $.post("/api/recipes", post, function() {
       window.location.href = "/recipe";
     });
   }
@@ -80,7 +78,7 @@ $(document).ready(function() {
       if (data) {
         console.log(data.UserId || data.id);
         // If this post exists, prefill our cms forms with its data
-        titleInput.val(data.title);
+        nameInput.val(data.title);
         bodyInput.val(data.body);
         userId = data.UserId || data.id;
         // If we have a post with this id, set a flag for us to know to update the post
@@ -90,29 +88,30 @@ $(document).ready(function() {
     });
   }
 
-  // A function to get Authors and then render our list of Authors
-  function getAuthors() {
-    $.get("/api/users", renderUserList);
-  }
-  // Function to either render a list of authors, or if there are none, direct the user to the page
-  // to create an author first
-  function renderUserList(data) {
-    if (!data.length) {
-      window.location.href = "/users";
-    }
-    $(".hidden").removeClass("hidden");
-    var rowsToAdd = [];
-    for (var i = 0; i < data.length; i++) {
-      rowsToAdd.push(createUserRow(data[i]));
-    }
-    userSelect.empty();
-    console.log(rowsToAdd);
-    console.log(userSelect);
-    userSelect.append(rowsToAdd);
-    userSelect.val(userId);
-  }
+  // // A function to get Authors and then render our list of Authors
+  // function getAuthors() {
+  //   $.get("/api/users", renderUserList);
+  // }
+  // // Function to either render a list of authors, or if there are none, direct the user to the page
+  // // to create an author first
+  // function renderUserList(data) {
+  //   if (!data.length) {
+  //     window.location.href = "/users";
+  //   }
+  //   $(".hidden").removeClass("hidden");
+  //   var rowsToAdd = [];
+  //   for (var i = 0; i < data.length; i++) {
+  //     rowsToAdd.push(createUserRow(data[i]));
+  //   }
+  //   userSelect.empty();
+  //   console.log(rowsToAdd);
+  //   console.log(userSelect);
+  //   userSelect.append(rowsToAdd);
+  //   userSelect.val(userId);
+  // }
 
   // Creates the author options in the dropdown
+  
   function createUserRow(user) {
     var listOption = $("<option>");
     listOption.attr("value", user.id);
