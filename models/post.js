@@ -1,25 +1,25 @@
 module.exports = function(sequelize, DataTypes) {
   var Item = sequelize.define("Item", {
-    product_name: {
+    recipe_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    quality: {
-      type: DataTypes.INTEGER,
+    image: {
+      type: DataTypes.STRING,
       allowNull: false,
       len: [1]
     },
-    description: {
+    instructions: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    photo: {
+    ingredients: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1]
