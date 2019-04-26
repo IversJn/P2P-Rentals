@@ -30,9 +30,9 @@ module.exports = function(app) {
   });
 
   // authors route loads author-manager.html
-  // app.get("/sellers", function(req, res) {
-
+  app.get("/users", function(req, res) {
+    res.render("userManager");
   //   res.sendFile(path.join(__dirname, "../public/author-manager.html"));
-  // });
+  });
 
 };
