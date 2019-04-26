@@ -1,37 +1,23 @@
-<title>Create</title>
-<div class="container hidden">
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<form id="cms">
+<div class="container recipe-container">
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<form id="create-recipe">
+				<div class="form-group">
+					<label for="recipe-name-input">Name:</label>
+					<input placeholder="Recipe Name" type="text" class="form-control" id="recipe-name-input">
+					<br />
 					<div class="form-group">
-						<label for="name">Name:</label>
-						<input placeholder="Post Title" type="text" class="form-control" id="name">
-						<br />
-						<div class="form-group">
-							<label for="quality">Quality</label>
-							<select class="form-control" id="quality">
-								<option>New</option>
-								<option>Great</option>
-								<option>Good</option>
-								<option>Minor Issues</option>
-								<option>Poor</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="imageInput">Input Photo</label>
-							<input type="file" class="form-control-file" id="imageInput">
-						</div>
-						<label for="body">Description:</label>
-						<textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
-						<div class="form-group">
-							<label for="category">Select Seller:</label>
-							<select class="custom-select" id="seller">
-  						</select>
-						</div>
-						<br />
-						<button type="submit" class="btn btn-success submit">Submit</button>
+						<label for="url-input">Input Photo URL</label>
+						<input placeholder="input url here..." type="text" class="form-control" id="url-input">
 					</div>
-				</form>
-			</div>
+					<label for="ingredients-input">ingredients:</label>
+					<textarea placeholder="Add Ingredients" class="form-control" rows="5" id="ingredients-input"></textarea>
+					<label for="instructions-input">instructions:</label>
+					<textarea placeholder="Add Instructions" class="form-control" rows="10" id="instructions-input"></textarea>
+					<br />
+					<button type="submit" class="btn btn-success submit">Submit</button>
+				</div>
+			</form>
 		</div>
 	</div>
+</div>
