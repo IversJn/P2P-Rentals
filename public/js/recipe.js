@@ -16,21 +16,21 @@ $(document).ready(function() {
   var userId;
   if (url.indexOf("?user_id=") !== -1) {
     userId = url.split("=")[1];
-    getPosts(userId);
+    getRecipes(userId);
   }
   // If there's no authorId we just get all posts as usual
   else {
-    getPosts();
+    getRecipes();
   }
 
 
   // This function grabs posts from the database and updates the view
-  function getPosts(user) {
+  function getRecipes(user) {
     userId = user || "";
     if (userId) {
       userId = "/?user_id=" + userId;
     }
-    $.get("/api/posts" + userId, function(data) {
+    $.get("/api/recipes" + userId, function(data) {
       console.log("Posts", data);
       posts = data;
       if (!posts || !posts.length) {
