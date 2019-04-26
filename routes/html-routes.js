@@ -5,7 +5,6 @@
 // Dependencies
 // =============================================================
 //var path = require("path");
-var controllers = require("../controllers/itemsController");
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -19,14 +18,14 @@ module.exports = function(app) {
   });
 
   // cms route loads cms.html
-  app.get("/item/:id", function(req, res) {
-    res.render("item");
+  app.get("/recipe/:id", function(req, res) {
+    res.render("recipe");
     //res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
   // blog route loads blog.html
-  app.get("/createItem", function(req, res) {
-    res.render("createItem");
+  app.get("/createRecipe", function(req, res) {
+    res.render("createRecipe");
     //res.sendFile(path.join(__dirname, "../public/blog.html"));
   });
 
