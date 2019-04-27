@@ -1,4 +1,4 @@
-<div class="container recipe-container">
+<div class="container ">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
 			<form id="create-recipe">
@@ -11,9 +11,25 @@
 						<input placeholder="input url here..." type="text" class="form-control" id="url-input">
 					</div>
 					<label for="ingredients-input">ingredients:</label>
-					<textarea placeholder="Add Ingredients" class="form-control" rows="5" id="ingredients-input"></textarea>
+					<textarea placeholder="Add Ingredients" class="form-control" rows="5"
+						id="ingredients-input"></textarea>
+					<div id="myDIV" class="header">
+						<label for="newIngredientInput">Ingredients</label>
+						<input type="text" id="newIngredientInput" placeholder="Add Ingredient...">
+						<span onclick="newElement()" class="addBtn">Add</span>
+					</div>
+
+					<ul id="myUL">
+						<li>Hit the gym</li>
+						<li class="checked">Pay bills</li>
+						<li>Meet George</li>
+						<li>Buy eggs</li>
+						<li>Read a book</li>
+						<li>Organize office</li>
+					</ul>
 					<label for="instructions-input">instructions:</label>
-					<textarea placeholder="Add Instructions" class="form-control" rows="10" id="instructions-input"></textarea>
+					<textarea placeholder="Add Instructions" class="form-control" rows="10"
+						id="instructions-input"></textarea>
 					<br />
 					<button type="submit" class="btn btn-success submit">Submit</button>
 				</div>
