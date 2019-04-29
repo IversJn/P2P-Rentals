@@ -19,11 +19,13 @@ $(document).ready(function() {
   var imageUrlInput = $("#image-url-input");
   var createRecipeForm = $("#create-recipe-form");
   var postCategorySelect = $("#category");
+  var array = [];
   // Giving the postCategorySelect a default value
   postCategorySelect.val("Personal");
   // Adding an event listener for when the form is submitted
   $(createRecipeForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
+    
     // Wont submit the post if we are missing a body or a title
     if (!recipeNameInput.val().trim() || !imageUrlInput.val().trim() || !ingredientsInput.val().trim() || !instructionsInput.val().trim()) {
       return;
@@ -85,4 +87,42 @@ $(document).ready(function() {
         window.location.href = "/recipebook";
       });
   }
+
+// Create a new list item when clicking on the "Add" button
+var num = 0;
+var array = [];
+$("#addBtn").click(function(){
+  var ul = $("#myUL");
+  var li = $(`<li id=item${num}>`)
+  var inputValue = $("#myInput");
+  var t = document.createTextNode(inputValue.val());
+//values are not being pushed into the array, this needs to be fixed.
+  array.push(inputValue);
+  console.log(array);
+  li.append(t);
+  if (inputValue.val() === '') {
+    alert("You must write something!");
+  } else {
+    ul.append(li);
+  }
+  inputValue.val("");
+
+//clear x buttons and appends to list item
+  var button = $(`<button class="close">`);
+  var txt = document.createTextNode("\u00D7");
+  button.append(txt)
+  li.append(button);
+  num ++;
+//logic to close item when button is clicked
+  $(".close").click(function(){
+    console.log("somethinggg");
+    console.log($(this).parent().attr("id"));
+    $(this).parent().remove();
+  })
+})
+function newElement() {
+  
+}
 });
+
+
