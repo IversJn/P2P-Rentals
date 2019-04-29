@@ -4,7 +4,6 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
-var path = require("path");
 var express = require("express");
 
 // Sets up the Express App
@@ -27,13 +26,11 @@ app.set("view engine", "handlebars");
 
 // Static directory
 app.use(express.static("public"));
-// app.use(express.static(__dirname + '/public'));
 
 // Routes
 // =============================================================
+require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-require("./routes/user-api-routes.js")(app);
-require("./routes/post-api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

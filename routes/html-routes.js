@@ -4,7 +4,8 @@
 
 // Dependencies
 // =============================================================
-//var path = require("path");
+var path = require("path");
+
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -13,26 +14,21 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    res.render("index");
+    res.render("recipeBook");
     //res.sendFile(path.join(__dirname, "../public/blog.html"));
   });
 
-  // cms route loads cms.html
-  app.get("/recipe/:id", function(req, res) {
-    res.render("recipe");
+  //this was /cms
+  app.get("/create", function(req, res) {
+    res.render("createRecipe");
     //res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
   // blog route loads blog.html
-  app.get("/create", function(req, res) {
-    res.render("createRecipe");
+  // this was /blog
+  app.get("/recipebook", function(req, res) {
+    res.render("recipeBook");
     //res.sendFile(path.join(__dirname, "../public/blog.html"));
-  });
-
-  // authors route loads author-manager.html
-  app.get("/users", function(req, res) {
-    res.render("userManager");
-  //   res.sendFile(path.join(__dirname, "../public/author-manager.html"));
   });
 
 };

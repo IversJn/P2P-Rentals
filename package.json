@@ -1,5 +1,5 @@
 {
-  "name": "post-author-joins",
+  "name": "blog-crud",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "express-handlebars": "^3.0.2",
-    "moment": "^2.24.0",
+    "handlebars": "^4.1.2",
     "mysql2": "^1.6.4",
     "sequelize": "^4.41.2"
   }
