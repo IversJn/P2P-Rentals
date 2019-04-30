@@ -17,22 +17,26 @@ $(document).ready(function() {
   var instructionsInput = $("#instructions-input");
   var recipeNameInput = $("#recipe-name-input");
   var imageUrlInput = $("#image-url-input");
-  var createRecipeForm = $("#create-recipe-form");
+  // ---took this out because it wasn't able to trigger the on submit event---
+  // var createRecipeForm = $("#create-recipe-form");
   var postCategorySelect = $("#category");
+  var array = [];
   // Giving the postCategorySelect a default value
   postCategorySelect.val("");
-  // Adding an event listener for when the form is submitted
-  $(createRecipeForm).on("submit", function handleFormSubmit(event) {
+
+  // ----replaced this event listener by giving the button an id and changing the event listener to .click---
+  // $(createRecipeForm).on("submit", function handleFormSubmit(event) {
+    $("#formSubmit").click(function handleFormSubmit(event){
     event.preventDefault();
     // Wont submit the post if we are missing a body or a title
-    if (!recipeNameInput.val().trim() || !imageUrlInput.val().trim() || !ingredientsInput.val().trim() || !instructionsInput.val().trim()) {
+    if (!recipeNameInput.val().trim() || !imageUrlInput.val().trim() || array === [] || !instructionsInput.val().trim()) {
       return;
     }
     // Constructing a newPost object to hand to the database
     var newPost = {
       name: recipeNameInput.val().trim(),
       image: imageUrlInput.val().trim(),
-      ingredients: ingredientsInput.val().trim(),
+      ingredients: array.toString(),
       instructions: instructionsInput.val().trim(),
       category: postCategorySelect.val()
     };
@@ -85,4 +89,44 @@ $(document).ready(function() {
         window.location.href = "/recipebook";
       });
   }
+
+// Create a new list item when clicking on the "Add" button
+var num = 0;
+var array = [];
+$("#addBtn").click(function(){
+  var ul = $("#myUL");
+  var li = $(`<li id=item${num}>`)
+  var inputValue = $("#myInput");
+  var t = document.createTextNode(inputValue.val());
+//values are not being pushed into the array, this needs to be fixed.
+  array.push(inputValue.val());
+  console.log(array);
+  li.append(t);
+  if (inputValue.val() === '') {
+    alert("You must write something!");
+  } else {
+    ul.append(li);
+  }
+  inputValue.val("");
+
+//clear x buttons and appends to list item
+  var button = $(`<button class="close">`);
+  var txt = document.createTextNode("\u00D7");
+  button.append(txt)
+  li.append(button);
+  num ++;
+//logic to close item when button is clicked
+  $(".close").click(function(){
+    console.log("somethinggg");
+    console.log($(this).parent().attr("id"));
+    $(this).parent().remove();
+
+    // looking into deleting array dynamically... issues with the current method is aligning the item num with array index
+    // var itemNum = $(this).parent().attr("id").slice(3);
+    // console.log(itemNum);
+
+  })
+})
 });
+
+

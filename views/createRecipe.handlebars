@@ -14,9 +14,15 @@
             <input type="text" class="form-control" id="image-url-input">
             <br />
             <label for="ingredients-input">Ingredients:</label>
-            <textarea class="form-control" rows="5" id="ingredients-input"></textarea>
-            <label for="instructions-input">Ingredients:</label>
-            <textarea class="form-control" rows="10" id="instructions-input"></textarea>
+            <div id="ingredients-input" class="form-control"></div>
+              <input type="text" id="myInput" placeholder="Ingredients...">
+              <span class="addBtn" id="addBtn">Add</span>
+            </div>
+            <ul id="myUL">
+            </ul>
+
+            <label for="instructions-input">Instructions:</label>
+            <textarea class="form-control" rows="3" id="instructions-input"></textarea>
             <div class="form-group">
               <label for="category">Select Category:</label>
               <select class="custom-select" id="category">
@@ -28,18 +34,12 @@
               </select>
             </div>
             <br />
-            <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+            <button id="formSubmit" type="submit" class="btn btn-success submit btn-lg">Submit</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <!-- Custom Script -->
-  <!--<script src="js/createRecipe.js" type="text/javascript"></script>-->
-
-
-
-
 
 
 
