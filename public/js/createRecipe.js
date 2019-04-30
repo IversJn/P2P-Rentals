@@ -22,7 +22,7 @@ $(document).ready(function() {
   var postCategorySelect = $("#category");
   var array = [];
   // Giving the postCategorySelect a default value
-  postCategorySelect.val("Personal");
+  postCategorySelect.val("");
 
   // ----replaced this event listener by giving the button an id and changing the event listener to .click---
   // $(createRecipeForm).on("submit", function handleFormSubmit(event) {
