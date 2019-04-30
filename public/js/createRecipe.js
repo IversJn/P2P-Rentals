@@ -29,7 +29,7 @@ $(document).ready(function() {
     $("#formSubmit").click(function handleFormSubmit(event){
     event.preventDefault();
     // Wont submit the post if we are missing a body or a title
-    if (!recipeNameInput.val().trim() || !imageUrlInput.val().trim() || array === [] || !instructionsInput.val().trim()) {
+    if (!recipeNameInput.val().trim() || !imageUrlInput.val().trim() || array === [] || ingArray === [] ) {
       return;
     }
     // Constructing a newPost object to hand to the database
@@ -37,7 +37,7 @@ $(document).ready(function() {
       name: recipeNameInput.val().trim(),
       image: imageUrlInput.val().trim(),
       ingredients: array.toString(),
-      instructions: instructionsInput.val().trim(),
+      instructions: ingArray.toString(),
       category: postCategorySelect.val()
     };
 
@@ -92,7 +92,9 @@ $(document).ready(function() {
 
 // Create a new list item when clicking on the "Add" button
 var num = 0;
+var numb = 0;
 var array = [];
+var ingArray = [];
 $("#addBtn").click(function(){
   var ul = $("#myUL");
   var li = $(`<li id=item${num}>`)
@@ -115,6 +117,41 @@ $("#addBtn").click(function(){
   button.append(txt)
   li.append(button);
   num ++;
+//logic to close item when button is clicked
+  $(".close").click(function(){
+    console.log("somethinggg");
+    console.log($(this).parent().attr("id"));
+    $(this).parent().remove();
+
+    // looking into deleting array dynamically... issues with the current method is aligning the item num with array index
+    // var itemNum = $(this).parent().attr("id").slice(3);
+    // console.log(itemNum);
+
+  })
+})
+
+$("#addInstruction").click(function(){
+  var ul = $("#myInstruction");
+  var li = $(`<li id=instruction${numb}>`)
+  var inputValue = $("#instructions-input");
+  var t = document.createTextNode(inputValue.val());
+//values are not being pushed into the array, this needs to be fixed.
+  ingArray.push(inputValue.val());
+  console.log(ingArray);
+  li.append(t);
+  if (inputValue.val() === '') {
+    alert("You must write something!");
+  } else {
+    ul.append(li);
+  }
+  inputValue.val("");
+
+//clear x buttons and appends to list item
+  var button = $(`<button class="close">`);
+  var txt = document.createTextNode("\u00D7");
+  button.append(txt)
+  li.append(button);
+  numb ++;
 //logic to close item when button is clicked
   $(".close").click(function(){
     console.log("somethinggg");
