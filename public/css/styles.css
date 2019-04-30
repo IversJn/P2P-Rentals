@@ -15,3 +15,21 @@ button.edit {
   float: right;
   margin: 5px;
 }
+
+#recipe-card {
+  margin: 5%;
+  padding: 2%;
+  background-color: #F8F9FA;
+}
+
+#category-display {
+  float: right;
+}
+
+#ingredients-display {
+  margin: 1%;
+}
+
+#instructions-display {
+  margin: 1%;
+}

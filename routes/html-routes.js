@@ -5,6 +5,7 @@
 // Dependencies
 // =============================================================
 var path = require("path");
+var db = require("../models");
 
 // Routes
 // =============================================================
@@ -21,6 +22,48 @@ module.exports = function(app) {
   //this was /cms
   app.get("/create", function(req, res) {
     res.render("createRecipe");
+    //res.sendFile(path.join(__dirname, "../public/cms.html"));
+  });
+
+  app.get("/recipe/:id", function(req, res) {
+    // var data = db.Post.findAll({})
+    // .then(function(dbPost) {
+    //   res.render("recipe", dbPost);
+    // });
+    // res.send(data);
+    console.log(req.params.id);
+
+    db.Post.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function(data) {
+      //return result;
+        console.log(data.dataValues);
+        res.render("recipe", data.dataValues);
+    });
+
+
+
+    // console.log(req.params.id);
+    // db.Post.findOne({
+    //   where: {
+    //     id: req.params.id
+    //   }
+    // })
+    //   .then(function(dbPost) {
+    //     res.render("recipe", dbPost);
+    //     //res.json(dbPost);
+    //   });
+
+
+      //return res.send(data);
+    // var data = db.Post.findAll({})
+    //   .then(function(dbPost) {
+    //     res.render("recipe", dbPost);
+    //   });
+    //{ name: 'Arthur'}
     //res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
