@@ -64,42 +64,42 @@ $(document).ready(function() {
     var newPostCardName = $("<h3>");
     newPostCardName.addClass("card-title col-md-7");
     newPostCardName.text(post.name);
-    var newPostCategory = $("<h5>");
+    var newPostCategory = $("<h6>");
     newPostCategory.addClass("col-md-5");
     newPostCategory.text(post.category);
     newPostCategory.css({
-      float: "right",
-      "font-weight": "600",
-      "margin-top":
-      "-40px"
+      float: "left",
+      "font-weight": "600"
+      //"margin-top":
+      //"-40px"
     });
     var buttonRow = $("<div>");
     buttonRow.addClass("row");
     var viewMoreBtn = $("<button>");
     viewMoreBtn.text("View More");
-    viewMoreBtn.addClass("view btn btn-primary col-md-5");
+    viewMoreBtn.addClass("view btn btn-outline-primary col-md-9 align-center");
     viewMoreBtn.css({
-      float: "left",
-      "margin-right": "2%"
+      float: "right",
+      "margin-left": "30%"
     });
-    var deleteBtn = $("<button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger col-md-2");
-    deleteBtn.css({
-      float: "right"
-    });
+    // var deleteBtn = $("<button>");
+    // deleteBtn.text("x");
+    // deleteBtn.addClass("delete btn btn-danger col-md-2");
+    // deleteBtn.css({
+    //   float: "right"
+    // });
     // var emptySpace = $("<div>");
     // emptySpace.addClass("col-md-3");
-    var editBtn = $("<button>");
-    editBtn.text("Edit");
-    editBtn.addClass("edit btn btn-secondary col-md-3");
-    editBtn.css({
-      "margin-right": "2%"
-    });
+    // var editBtn = $("<button>");
+    // editBtn.text("Edit");
+    // editBtn.addClass("edit btn btn-secondary col-md-3");
+    // editBtn.css({
+    //   "margin-right": "2%"
+    // });
     buttonRow.append(viewMoreBtn);
-    buttonRow.append(editBtn);
+    //buttonRow.append(editBtn);
     //buttonRow.append(emptySpace);
-    buttonRow.append(deleteBtn);
+    //buttonRow.append(deleteBtn);
     var newPostCardFooter = $("<div>");
     newPostCardFooter.addClass("card-footer");
 
