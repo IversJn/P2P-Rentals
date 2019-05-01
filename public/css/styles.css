@@ -32,3 +32,54 @@ button.edit {
 #instructions-display {
   margin: 1%;
 }
+
+#create-recipe-card {
+  padding: 3% 7% 3% 7%;
+  margin-top: 2%;
+  background-color: #F8F9FA;
+}
+
+#addBtn {
+  margin-top: 1%;
+}
+
+#addInstruction {
+  margin-top: 1%;
+}
+
+#myUL ul {
+  list-style-type: none;
+  padding: 2%;
+  background-color: rgb(228, 228, 228);
+}
+
+#myUL li {
+  background-color: rgb(104, 147, 175);
+  border: 2px gray;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 2%;
+}
+
+#myInstruction ol {
+  padding: 2%;
+  background-color: rgb(228, 228, 228);
+}
+
+#myInstruction li {
+  background-color: rgb(104, 147, 175);
+  border: 2px gray;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 2%;
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  margin-top: 7%;
+  background-color: #F8F9FA;
+  text-align: center;
+}

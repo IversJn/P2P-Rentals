@@ -1,54 +1,51 @@
-  <div class="container">
-    <div class="row">
-      <div class="row">
-        <div class="col-sm-2 mt-4">
-          <a class="btn btn-light" href="/recipebook">Go to Recipe Book</a>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8 offset-md-2 card" id="create-recipe-card">
+      <form id="create-recipe-form">
+        <div class="form-group">
+          <h3>Create Recipe</h3>
+          <label for="recipe-name-input">Name:</label>
+          <input type="text" class="form-control" id="recipe-name-input">
+          <label for="image-url-input">Image URL:</label>
+          <input type="text" class="form-control" id="image-url-input">
+          <br />
+          <label for="myInput">Ingredients:</label>
+          <!--<div id="ingredients-input" class="form-control"></div>-->
+          <input type="text" id="myInput" class="form-control" placeholder="Ingredients...">
+          <span class="addBtn btn btn-outline-secondary" id="addBtn">Add</span>
         </div>
-      </div>
-      <div class="col-md-5 offset-md-3">
-        <form id="create-recipe-form">
-          <div class="form-group">
-            <label for="recipe-name-input">Name:</label>
-            <input type="text" class="form-control" id="recipe-name-input">
-            <label for="image-url-input">Image URL:</label>
-            <input type="text" class="form-control" id="image-url-input">
-            <br />
-            <label for="ingredients-input">Ingredients:</label>
-            <div id="ingredients-input" class="form-control"></div>
-              <input type="text" id="myInput" placeholder="Ingredients...">
-              <span class="addBtn" id="addBtn">Add</span>
-            </div>
-            <ul id="myUL">
-            </ul>
+        <ul id="myUL">
+        </ul>
 
-            <label for="instructions-input">Instructions:</label>
-            <textarea class="form-control" rows="3" id="instructions-input"></textarea>
-              <span class="addInstruction" id="addInstruction">Add</span>
-            <ul id="myInstruction">
-              
-            </ul>
-            <div class="form-group">
-              <label for="category">Select Category:</label>
-              <select class="custom-select" id="category">
-                <option value="Breakfast">Breakfast</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Dinner">Dinner</option>
-                <option value="Snack">Snack</option>
-                <option value="Drink">Drink</option>
-              </select>
-            </div>
-            <br />
-            <button id="formSubmit" type="submit" class="btn btn-outline-success submit btn-lg">Submit</button>
-          </div>
-        </form>
-      </div>
+        <label for="instructions-input">Instructions:</label>
+        <textarea class="form-control" rows="3" id="instructions-input" placeholder="Instructions..."></textarea>
+        <span class="addInstruction btn btn-outline-secondary" id="addInstruction">Add</span>
+        <ol id="myInstruction">
+
+        </ol>
+        <div class="form-group">
+          <label for="category">Food Category:</label>
+          <select class="custom-select" id="category">
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Snack">Snack</option>
+            <option value="Drink">Drink</option>
+          </select>
+        </div>
+        <br />
+        <button id="formSubmit" type="submit" class="btn btn-outline-success submit btn-lg">Submit</button>
     </div>
+    </form>
   </div>
+</div>
+</div>
 
 
 
 
-    {{!-- <div class="container">
+{{!-- <div class="container">
     <div class="row">
       <div class="row">
         <div class="col-sm-2 mt-4">
